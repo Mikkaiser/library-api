@@ -1,4 +1,4 @@
-import { UserEntity } from "src/users/entities/user.entity";
+import { UserEntity } from "../../users/entities/user.entity";
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('book')
@@ -20,5 +20,14 @@ export class BookEntity {
 
     @ManyToOne(() => UserEntity, (user) => user.books, { nullable: true })
     user?: UserEntity;
+
+    //Inputing values to properties to unit tests
+    constructor(book?: Partial<BookEntity>) {
+        this.id = book?.id;
+        this.name = book?.name;
+        this.price = book?.price;
+        this.author = book?.author;
+        this.userId = book?.userId;
+    }
     
 }
